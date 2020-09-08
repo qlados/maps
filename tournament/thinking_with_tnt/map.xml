@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Thinking with TNT</name>
+<version>1.0.0</version>
+<objective>Destroy both of the enemies endstone monuments.</objective>
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!-- Valky -->
+</authors>
+<gamemode>dtm</gamemode>
+<teams>
+    <team id="orange-team" color="gold" max="8">Orange</team>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit" force="true">
+		<clear/>
+        <item slot="0" material="iron sword"/>
+        <item slot="1" material="bow">
+            <enchantment level="1">infinity</enchantment>
+        </item>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" material="iron axe">
+            <enchantment level="1">efficiency</enchantment>
+        </item>
+        <item slot="4" amount="64" damage="2" material="wood"/>
+        <item slot="5" amount="32" material="glass"/>
+        <item slot="6" material="golden apple"/>
+        <item slot="7" amount="64" material="cooked beef"/>
+        <item slot="27" material="arrow"/>
+    </kit>
+</kits>
+<destroyables materials="ender stone">
+    <destroyable name="West Monument" owner="blue-team">
+       <region>
+           <cuboid min="-151,59,464" max="-148,54,461"/>
+       </region>
+    </destroyable>
+    <destroyable name="East Monument" owner="blue-team">
+       <region>
+           <cuboid min="-85,59,464" max="-82,54,461"/>
+       </region>
+    </destroyable>	
+    <destroyable name="West Monument" owner="orange-team">
+       <region>
+           <cuboid min="-151,59,395" max="-148,54,398"/>
+       </region>
+    </destroyable>
+    <destroyable name="East Monument" owner="orange-team">
+       <region>
+           <cuboid min="-85,59,395" max="-82,54,398"/>
+       </region>
+    </destroyable>	
+</destroyables>
+<spawns>
+    <spawn team="orange-team" kit="spawn-kit">
+        <regions yaw="0">
+            <point>-116.5,50,355.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="spawn-kit">
+        <regions yaw="180">
+            <point>-116.5,50,503.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <point>-116.5,85,429.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+	<team id="only-orange">orange-team</team>
+	<team id="only-blue">blue-team</team>
+	
+	<not id="no-spawners">
+		<material>mob spawner</material>
+	</not>
+</filters>
+<regions>
+	<union id="blue-spawn-tubes">
+		<cuboid min="-82,53,484" max="-85,50,499"/>
+		<cuboid min="-148,53,484" max="-151,50,499"/>	
+	</union>
+	<union id="orange-spawn-tubes">
+		<cuboid min="-82,53,360" max="-85,50,375"/>
+		<cuboid min="-148,53,360" max="-151,50,375"/>		
+	</union>	
+	
+	<apply block="no-spawners">
+        <region>
+            <rectangle min="-176,484" max="-57,375"/>
+        </region>	
+	</apply>
+    <apply block="never" message="You may not build outside of the playable region!">
+        <region>
+            <negative>
+                <rectangle min="-176,484" max="-57,375"/>
+            </negative>
+        </region>
+    </apply>
+    <apply enter="only-blue" message="You may not enter Blue Team's spawn!" region="blue-spawn-tubes"/>
+    <apply enter="only-orange" message="You may not enter Orange Team's spawn!" region="orange-spawn-tubes"/>
+</regions>
+<crafting>
+    <disable>iron fence</disable>
+    <disable>anvil</disable>
+    <disable>iron trapdoor</disable>
+</crafting>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>obsidian</item>
+    <item>anvil</item>
+    <item>iron fence</item>
+    <item>iron trapdoor</item>
+    <item>ender stone</item>
+    <item>glowstone dust</item>
+    <item>cooked beef</item>
+</itemremove>
+<timelock>on</timelock>
+<maxbuildheight>72</maxbuildheight>
+<time result="objectives">45m</time>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+<disable-water-sources>true</disable-water-sources>
+</map>

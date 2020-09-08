@@ -1,0 +1,120 @@
+<map proto="1.4.0">
+<gamemode>koth</gamemode>
+<name>Toca 2</name>
+<version>1.0.1</version>
+<objective>Be the first team to reach 1500 points!</objective>
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!-- Valky -->
+</authors>
+<timelock>on</timelock>
+<teams>
+    <team id="red" color="dark red" max="4" max-overfill="4">Red</team>
+    <team id="blue" color="blue" max="4" max-overfill="4">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <clear/>
+	    <item slot="0" unbreakable="true">stone sword</item>
+		<item slot="1" unbreakable="true">bow</item>
+		<item slot="2" amount="8">arrow</item>
+		<item slot="3">golden apple</item>
+		<effect amplifier="100" duration="3">heal</effect>
+        <effect amplifier="100" duration="3">damage resistance</effect>
+		<boots unbreakable="true" locked="true" enchantment="protection projectile:2">gold boots</boots>
+	</kit>
+	<kit id="red-spawn-kit" parents="spawn">
+	    <chestplate color="993333" unbreakable="true" locked="true">leather chestplate</chestplate>
+	</kit>
+	<kit id="blue-spawn-kit" parents="spawn">
+	    <chestplate color="334CB2" unbreakable="true" locked="true">leather chestplate</chestplate>
+	</kit>
+</kits>
+<respawn delay="4s" auto="true"/>
+<spawns>
+    <spawn team="red" kit="red-spawn-kit">
+        <regions yaw="180">
+		    <point>-264.5,26,558.5</point>
+		</regions>
+	</spawn>
+    <spawn team="blue" kit="blue-spawn-kit">
+        <regions yaw="0">
+		    <point>-264.5,26,596.5</point>
+		</regions>
+	</spawn>
+    <default>
+        <regions yaw="90">
+		    <point>-259.5,37,577.5</point>
+		</regions>
+	</default>
+</spawns>
+<filters>
+	<not id="no-trapdoors">
+		<material>trap door</material>
+	</not>
+</filters>
+<regions>
+    <apply block="never" region="everywhere"/>
+	<apply use="no-trapdoors" region="everywhere"/>
+</regions>
+<score>
+    <limit>3000</limit>
+</score>
+<king>
+    <hills neutral-state="false">
+	    <hill name="Middle" capture-time="6s" points="6" required="false">
+		    <capture>
+			    <cuboid min="-267,0,580" max="-272,50,575"/>
+			</capture>
+		    <progress>
+			    <cuboid min="-267,0,584" max="-277,50,571"/>
+				<cuboid min="-272,0,585" max="-276,50,570"/>
+			</progress>
+		    <captured>
+			    <cuboid min="-267,0,584" max="-277,50,571"/>
+				<cuboid min="-272,0,585" max="-276,50,570"/>				
+			</captured>
+		</hill>
+	    <hill name="Red Hill" capture-time="3s" points="4" initial-owner="red" required="false">
+		    <capture>
+			    <cuboid min="-265,0,564" max="-267,50,562"/>
+			</capture>
+		    <progress>
+			    <cuboid min="-265,0,564" max="-268,50,562"/>
+			</progress>
+		    <captured>
+			    <cuboid min="-265,0,564" max="-268,50,562"/>
+			</captured>
+		</hill>
+	    <hill name="Blue Hill" capture-time="3s" points="4" initial-owner="blue" required="false">
+		    <capture>
+			    <cuboid min="-265,0,591" max="-267,50,593"/>
+			</capture>
+		    <progress>
+			    <cuboid min="-265,0,591" max="-268,50,593"/>
+			</progress>
+		    <captured>
+			    <cuboid min="-265,0,591" max="-268,50,593"/>
+			</captured>
+		</hill>
+	</hills>
+</king>
+<toolrepair>
+    <tool>stone sword</tool>
+	<tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather chestplate</item>
+    <item>gold boots</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<killreward>
+	<item amount="4">arrow</item>
+	<item>golden apple</item>
+</killreward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

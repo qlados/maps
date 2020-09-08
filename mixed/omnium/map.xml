@@ -1,0 +1,193 @@
+<map proto="1.4.0">
+<name>Omnium</name>
+<version>1.1</version>
+<objective>Destroy the enemies coal monuments!</objective>
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/><!-- Valky--> 
+</authors>
+<contributors>
+    <contributor contribution="gooooooood feedback">Sharkskill</contributor>
+</contributors>
+<rules>
+	<rule>Capturing the hill activates the jump pads on the sides for your team.</rule>
+</rules>
+<teams>
+    <team id="red-team" color="dark red" max="8" max-overfill="10">Red</team>
+    <team id="blue-team" color="blue" max="8" max-overfill="10">Blue</team>
+</teams>
+<respawn delay="3s" auto="false"/>
+<kits>
+<kit id="spawn" potion-particles="false">
+    <item slot="0" unbreakable="true">stone sword</item>
+    <item slot="1" unbreakable="true">bow</item>
+    <item slot="28" amount="8">arrow</item>
+    <item slot="2" unbreakable="true">wood pickaxe</item>
+    <item slot="8">golden apple</item>
+    <potion duration="4" amplifier="4">heal</potion>
+    <potion duration="4" amplifier="4">damage resistance</potion>
+    <leggings enchantment="protection projectile:3" damage="-3000" unbreakable="true">iron leggings</leggings>
+</kit>
+<kit id="red" parents="spawn">
+    <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+    <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+    <boots color="cd0000" unbreakable="true">leather boots</boots>
+</kit>
+<kit id="blue" parents="spawn">
+    <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+    <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+    <boots color="0066cc" unbreakable="true">leather boots</boots>
+</kit>
+<kit id="obs" potion-particles="false">
+    <potion duration="oo">night vision</potion>
+</kit>
+</kits>
+<regions>
+    <!-- Jumppads-->
+    <union id="mid-jumppads">
+        <cuboid id="midsouthpad" min="-51,3,-54" max="-48,3.5,-51" />
+        <cuboid id="midnorthpad" min="-51,3,-18" max="-48,3.5,-15" />       
+    </union>  
+    <!-- Monument Regions-->
+    <union id="monus">
+        <cuboid id="rednorthmonuregion" min="-36,10,-51" max="-39,13,-54" />
+        <cuboid id="redsouthmonuregion" min="-36,10,-15" max="-39,13,-18" />
+        <cuboid id="bluenorthmonuregion" min="-60,10,-54" max="-63,13,-51" />
+        <cuboid id="bluesouthmonuregion" min="-60,10,-18" max="-63,13,-15" /> 
+    </union>
+    <!--Spawn Regions-->
+    <cuboid id="redspawn" min="1,8,-29" max="-30,15,-40"/>
+    <cuboid id="bluespawn" min="-69,8,-29" max="-100,15,-40"/>
+    <apply region="redspawn" enter="only-red" message="You may not enter the enemies spawn!"/>
+    <apply region="bluespawn" enter="only-blue" message="You may not enter the enemies spawn!"/>
+     
+    <!--Block Apply-->
+    <apply block="always" region="monus"/>    
+    <apply block="never" message="You may only break the coal monuments!">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <!--Jumppads-->  
+    <apply region="mid-jumppads" velocity="0.0,1.25,0.0" filter="bluehillfilter"/>    
+    <apply region="mid-jumppads" velocity="0.0,1.25,0.0" filter="redhillfilter"/> 	
+    <!--Beacon Apply-->
+    <apply use="no-beacons">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>      
+</regions>
+<spawns>
+<spawn team="red-team" kit="red">
+    <regions yaw="90">
+        <cylinder base="-1.5,8,-34.5" radius="0.5" height="0.5"/>
+    </regions>    
+</spawn>
+ 
+<spawn team="blue-team" kit="blue">
+    <regions yaw="-90">
+        <cylinder base="-97.5,8,-34.5" radius="0.5" height="0.5" filter="bluehill"/>
+    </regions>
+</spawn>
+ 
+<default kit="obs">
+    <regions yaw="180">
+        <cylinder base="-49.5,31,-34.5" radius="0.5" height="0.5"/>
+    </regions>
+</default>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+     
+    <objective id="redhill" team="red-team">hill</objective>
+    <objective id="bluehill" team="blue-team">hill</objective>
+	<not id="nohill">
+		<any>
+			<objective team="red-team">hill</objective>
+			<objective team="blue-team">hill</objective>			
+		</any>
+	</not>	
+
+	<all id="bluehillfilter">
+		<team>blue-team</team>
+		<objective team="blue-team">hill</objective>
+	</all>
+	<all id="redhillfilter">
+		<team>red-team</team>
+		<objective team="red-team">hill</objective>	
+	</all>
+
+<!--Disable Beacons-->
+    <all id="no-beacons">
+        <not>
+            <material>beacon</material>
+        </not>
+    </all>
+</filters>
+<portals>
+    <!--Hill Portals-->
+    <portal x="@-20.5" y="@8" z="@-34.5" yaw="@90" filter="redhill">
+        <region>
+            <cuboid min="-3,8,-37" max="-4,11,-32"/>
+        </region>
+    </portal>
+    <portal x="@-78.5" y="@8" z="@-34.5" yaw="@-90" filter="bluehill">
+        <region>
+            <cuboid min="-96,8,-32" max="-95,11,-37"/>
+        </region>
+    </portal> 
+</portals>
+<!--Itemremovals+Killrewards-->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+	<item>coal block</item>
+	<item>beacon</item>
+	<item>sign</item>
+</itemremove>
+<toolrepair>
+	<tool>wood pickaxe</tool>
+</toolrepair>
+<killreward>
+    <item amount="1">golden apple</item>
+    <item amount="4">arrow</item>
+</killreward>
+<destroyables show-progress="true">
+<!--Monuments-->
+    <destroyable id="rednorthmonu" name="North Monument" owner="red-team" sparks="true" region="rednorthmonuregion" required="true" material="coal block;beacon" mode-changes="false"/>
+    <destroyable id="redsouthmonu" name="South Monument" owner="red-team" sparks="true" region="redsouthmonuregion" required="true" material="coal block;beacon" mode-changes="false"/>
+    <destroyable id="bluenorthmonu" name="North Monument" owner="blue-team" sparks="true" region="bluenorthmonuregion" required="true" material="coal block;beacon" mode-changes="false"/>
+    <destroyable id="bluesouthmonu" name="South Monument" owner="blue-team" sparks="true" region="bluesouthmonuregion" required="true" material="coal block;beacon" mode-changes="false"/>
+</destroyables>
+<!--Points-->
+<control-points incremental="true" neutral-state="false" show-progress="true" scaled-time="true" time-multiplier="0.5" required="false">
+<control-point id="hill" name="Hill" capture-time="6s" points="0">
+    <capture-region>
+        <cuboid min="-46,0,-31" max="-53,3,-38"/>
+    </capture-region>
+    <progress-display-region>
+        <cuboid min="-46,0,-31" max="-53,2,-38"/>
+    </progress-display-region>
+    <owner-display-region>
+        <cuboid min="-46,0,-31" max="-53,24,-38"/>
+        <cuboid min="-56,0,-62" max="-43,6,-7"/>
+        <cuboid min="-45,7,-4" max="-54,15,-65"/>
+		<cuboid min="-52,0,-57" max="-47,30,-62"/>
+		<cuboid min="-52,0,-7" max="-47,30,-12"/>		
+    </owner-display-region>
+</control-point>
+</control-points>
+<broadcasts>
+	<tip after="1s" every="1m">Capturing the middle hill unlocks the jump pads to the monuments!</tip>	
+</broadcasts>
+<!--Miscs-->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>

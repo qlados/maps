@@ -1,0 +1,133 @@
+<map proto="1.4.0">
+<name>Lunen</name>
+<version>1.0</version>
+<objective>Destroy the enemy monument!</objective>
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/><!-- Valky--> 
+</authors>
+<teams>
+    <team id="red-team" color="dark red" max="3" max-overfill="3">Red</team>
+    <team id="blue-team" color="blue" max="3" max-overfill="3">Blue</team>
+</teams>
+<time>20m</time>
+<respawn delay="3.5s" auto="false"/>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" material="stone axe" enchantment="dig speed:2"/>
+        <item slot="4" material="wood" amount="4"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" material="cooked beef" amount="64"/>
+        <item slot="28" material="arrow" amount="6"/>
+        <effect duration="2s" amplifier="100">resistance</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet color="cd0000">leather helmet</helmet>
+        <chestplate color="cd0000">leather chestplate</chestplate>
+        <leggings color="cd0000">leather leggings</leggings>
+        <boots color="cd0000">leather boots</boots>
+        <item slot="5" amount="4" damage="14">stained clay</item> 
+		<maybe filter="time-5">
+			<item slot="4" material="wood" amount="8"/>		
+			<item slot="5" amount="8" damage="14">stained clay</item> 
+		</maybe>		
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <helmet color="0066cc">leather helmet</helmet>
+        <chestplate color="0066cc">leather chestplate</chestplate>
+        <leggings color="0066cc">leather leggings</leggings>
+        <boots color="0066cc">leather boots</boots> 
+        <item slot="5" amount="4" damage="11">stained clay</item> 
+		<maybe filter="time-5">
+			<item slot="4" material="wood" amount="8"/>		
+			<item slot="5" amount="8" damage="11">stained clay</item> 
+		</maybe>
+    </kit>
+</kits>
+<regions>
+    <!-- Monument Regions-->
+    <union id="monus">
+        <cuboid id="redmonuregion" min="-66,9,141" max="-65,11,142" />
+        <cuboid id="bluemonuregion" min="-82,9,126" max="-81,11,125" />
+    </union>
+    <!--Spawn Regions-->
+    <rectangle id="redspawn" min="-82,158" max="-87,163"/>
+    <rectangle id="bluespawn" min="-98,142" max="-103,147"/>
+    <apply region="redspawn" enter="only-red" message="You may not enter the enemies spawn!"/>
+    <apply region="bluespawn" enter="only-blue" message="You may not enter the enemies spawn!"/>     
+    <!--Block Apply-->  
+    <apply block="no-void" message="You may not modify blocks here!" region="everywhere"/>      
+</regions>
+<spawns>
+<spawn team="red-team" kit="red-kit">
+    <regions yaw="-150">
+        <point>-84.5,7,160.5</point>
+    </regions>    
+</spawn>
+<spawn team="blue-team" kit="blue-kit">
+    <regions yaw="-120">
+        <point>-100.5,7,144.5</point>
+    </regions>
+</spawn>
+<default>
+    <regions yaw="-135">
+        <cylinder base="-80.5,10,140.5" radius="0.5" height="0.5"/>
+    </regions>
+</default>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <not id="no-void">
+        <void/>
+    </not>	
+	<all id="time-5">
+  		  <time>5m</time>
+  	</all>	
+</filters>
+<maxbuildheight>12</maxbuildheight>
+<!--Itemremovals+Killrewards-->
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+	<item>cooked beef</item>
+	<item>obsidian</item>
+	<item>beacon</item>
+	<item>coal block</item>
+	<item>stained clay</item>
+	<item>wood</item>
+	<item>seeds</item>
+	<item>sapling</item>
+	<item>log</item>
+	<item>step</item>
+	<item>wood step</item>
+	<item>ladder</item>
+	<item>fence</item>
+	<item>cobblestone</item>
+	<item>wool</item>
+	<item>dirt</item>
+</itemremove>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>
+	<tool>diamond pickaxe</tool>
+	<tool>stone axe</tool>
+</toolrepair>
+<killreward>
+    <item amount="1">golden apple</item>
+    <item amount="4">arrow</item>
+	<item amount="4">wood</item>
+</killreward>
+<destroyables show-progress="true" required="true" material="obsidian" mode-changes="true" sparks="true">
+    <destroyable id="redmonu" name="Red's Monument" owner="red-team" region="redmonuregion"/>
+    <destroyable id="bluemonu" name="Blue's Monument" owner="blue-team" region="bluemonuregion"/>
+</destroyables>
+<modes>
+    <mode after="10m" material="beacon"/>
+    <mode after="15m" material="coal block"/>
+</modes>
+</map>

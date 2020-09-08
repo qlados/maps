@@ -1,0 +1,117 @@
+<map proto="1.3.5">
+<name>Villa KotH</name>
+<version>1.2.3</version>
+<objective>Gain 750 points!</objective>
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/><!-- Valky-->
+    <author uuid="ffffec3a-728a-485a-af6e-374e86883939"/><!-- Jeremy_Wade-->
+    <author uuid="96f9aa16-9c93-4b1d-9bce-18b8c212074b"/><!-- ArmyFrog-->	
+</authors>
+<contributors>
+	<contributor contribution="made the world a prettier place">ItsCal</contributor>
+	<contributor contribution="roof design">Horaz</contributor>
+</contributors>
+<teams>
+	<team color="red" max="14" max-overfill="16">Red</team>
+	<team color="blue" max="14" max-overfill="16">Blue</team>
+</teams>
+<respawn delay="4s" auto="true"/>
+<kits>
+<kit name="spawn" potion-particles="false">
+	<item slot="0">stone sword</item>
+	<item slot="1">bow</item>
+	<item slot="28" amount="16">arrow</item>
+	<item slot="2" amount="32">golden carrot</item>
+	<potion duration="3" amplifier="4">heal</potion>
+	<potion duration="3" amplifier="4">damage resistance</potion>
+	<potion duration="oo">night vision</potion>
+	<leggings enchantment="protection projectile:1" damage="-3000">iron leggings</leggings>
+</kit>
+<kit name="red" parents="spawn">
+	<helmet color="cd0000" damage="-3000">leather helmet</helmet>
+	<chestplate color="cd0000" damage="-3000">leather chestplate</chestplate>
+	<boots color="cd0000" damage="-3000">leather boots</boots>
+</kit>
+<kit name="blue" parents="spawn">
+	<helmet color="0066cc" damage="-3000">leather helmet</helmet>
+	<chestplate color="0066cc" damage="-3000">leather chestplate</chestplate>
+	<boots color="0066cc" damage="-3000">leather boots</boots>
+</kit>
+<kit name="obs" potion-particles="false">
+	<potion duration="oo">night vision</potion>
+</kit>
+</kits>
+<regions>
+<apply block="deny-all">
+	<rectangle min="-oo,-oo" max="oo,oo"/>
+</apply>
+</regions>
+<spawns>
+<spawn team="red" kit="red" yaw="90">
+	<cylinder base="45,10.5,-14" radius="0.5" height="0.5"/>
+</spawn>
+<spawn team="blue" kit="blue" yaw="-90">
+	<cylinder base="-84,10.5,-14" radius="0.5" height="0.5"/>
+</spawn>
+<default kit="obs" yaw="180">
+	<cuboid min="-20.5,36,12.5" max="-18.5,37,10.5"/>
+</default>
+</spawns>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>
+</toolrepair>
+<itemremove>
+	<item>arrow</item>
+	<item>golden apple</item>
+	<item>golden carrot</item>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>iron leggings</item>
+	<item>leather boots</item>
+</itemremove>
+<killreward>
+	<item amount="1">golden apple</item>
+	<item amount="6">arrow</item>
+</killreward>
+<timelock>on</timelock>
+<control-points incremental="true" neutral-state="true" show-progress="true" scaled-time="true" time-multiplier="0.5">
+<control-point name="Reds Base" capture-time="5s" points="1" initial-owner="red">
+	<capture-region>
+		<cuboid min="19,14,-7" max="12,17,0"/>
+	</capture-region>
+	<progress-display-region>
+		<cuboid min="19,14,-7" max="12,17,0"/>
+	</progress-display-region>
+	<owner-display-region>
+		<cuboid min="19,14,-7" max="12,17,0"/>
+	</owner-display-region>
+</control-point>
+<control-point name="Mansion" capture-time="8s" points="1.5">
+	<capture-region>
+		<cylinder base="-19.5,16,-33.5" radius="4.5" height="2"/>
+	</capture-region>
+	<progress-display-region>
+		<cylinder base="-19.5,16,-33.5" radius="4.5" height="2"/>
+	</progress-display-region>
+	<owner-display-region>
+		<cylinder base="-19.5,16,-33.5" radius="4.5" height="2"/>
+	</owner-display-region>
+</control-point>
+<control-point name="Blue Base" capture-time="5s" points="1" initial-owner="blue">
+	<capture-region>
+		<cuboid min="-51,14,-7" max="-58,17,0"/>
+	</capture-region>
+	<progress-display-region>
+		<cuboid min="-51,14,-7" max="-58,17,0"/>
+	</progress-display-region>
+	<owner-display-region>
+		<cuboid min="-51,14,-7" max="-58,17,0"/>
+	</owner-display-region>
+</control-point>
+</control-points>
+<score>
+<limit>750</limit>
+<king/>
+</score>
+</map>

@@ -1,0 +1,130 @@
+<map proto="1.4.0">
+<name>Pandemic</name>
+<version>1.0.0</version>
+<objective>Capture the enemy wool!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!-- Valky -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="12" max-overfill="14">Red</team>
+    <team id="yellow" color="yellow" max="12" max-overfill="14">Yellow</team>
+</teams>
+<spawns>
+    <spawn team="yellow" kit="yellow-kit">
+        <regions yaw="180">
+            <point>-80.5,9,-25.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="180">
+            <point>40.5,9,-25.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <cylinder base="-20,12,-26" radius="1" height="0.5" />
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" material="stone sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="iron pickaxe" unbreakable="true"/>
+        <item slot="3" material="stone axe" enchantment="dig speed:2" unbreakable="true"/>
+        <item slot="4" material="cooked beef" amount="64"/>
+        <item slot="5" material="golden apple" amount="2"/>
+        <item slot="8" material="wood" damage="1" amount="32"/>
+        <item slot="28" material="arrow" amount="24"/>
+        <effect duration="4s" amplifier="100">resistance</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+        <item slot="7" amount="16" damage="14">stained clay</item>
+    </kit>
+    <kit id="yellow-kit" parents="spawn-kit">
+        <helmet color="E5E533" unbreakable="true">leather helmet</helmet>
+        <chestplate color="E5E533" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="E5E533" unbreakable="true">leather leggings</leggings>
+        <boots color="E5E533" unbreakable="true">leather boots</boots>
+        <item slot="7" amount="16" damage="4">stained clay</item>
+    </kit>
+</kits>
+<filters>
+    <team id="only-yellow">yellow</team>
+    <team id="only-red">red</team>
+    <not id="no-void">
+        <void/>
+    </not>
+    <not id="no-chest-red">
+        <any>
+            <team>red</team>
+            <material>chest</material>
+        </any>
+    </not>
+    <not id="no-chest-yellow">
+        <any>
+            <team>yellow</team>
+            <material>chest</material>
+        </any>
+    </not>
+    <not id="no-spawners">
+        <material>mob spawner</material>
+    </not>
+</filters>
+<regions>
+    <rectangle id="red-wool-room" min="34,-10" max="47,-21"/>
+    <rectangle id="yellow-wool-room" min="-87,-10" max="-74,-21"/>
+    <rectangle id="red-spawn" min="46,-22" max="35,-30"/>
+    <rectangle id="yellow-spawn" min="-75,-22" max="-86,-30"/>
+    <apply block="no-chest-red" message="You may not break blocks in the wool room." region="red-wool-room"/>
+    <apply block="no-chest-yellow" message="You may not break blocks in the wool room." region="yellow-wool-room"/>
+    <apply enter="only-yellow" use="only-yellow" message="You may not enter this wool room." region="red-wool-room"/>
+    <apply enter="only-red" use="only-red" message="You may not enter this wool room." region="yellow-wool-room"/>
+    <apply enter="only-red" message="You may not enter the enemy spawn." region="red-spawn"/>
+    <apply enter="only-yellow" message="You may not enter the enemy spawn." region="yellow-spawn"/>
+    <apply block="never" message="You may not edit spawn." region="red-spawn"/>
+    <apply block="never" message="You may not edit spawn." region="yellow-spawn"/>
+    <apply block-break="no-spawners" message="You may not break the spawner." region="everywhere"/>
+    <apply block-place="no-void" message="You may not build in the void." region="everywhere"/>
+</regions>
+<wools craftable="false">
+    <wool team="red" color="yellow" location="-81,6,-21">
+        <monument><block>40,10,-23</block></monument>
+    </wool>
+    <wool team="yellow" color="red" location="40,6,-21">
+        <monument><block>-81,10,-23</block></monument>
+    </wool>
+</wools>
+<killreward>
+    <item material="golden apple"/>
+    <item material="arrow" amount="24"/>
+    <item material="wood" damage="1" amount="16"/>
+</killreward>
+<maxbuildheight>16</maxbuildheight>
+<itemremove>
+    <item>wood</item>
+    <item>stained clay</item>
+    <item>flint</item>
+    <item>cooked beef</item>
+    <item>string</item>
+    <item>dirt</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+</map>

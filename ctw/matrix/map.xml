@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Matrix</name>
+<version>1.0.0</version>
+<objective>Capture the wool located at the beacon!</objective>
+<!--<include src="blitz-global.xml"/>-->
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!-- Valky -->
+    <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
+</authors>
+<teams>
+	<team id="red-team" color="dark red" max="8" max-overfill="8">Red</team>
+	<team id="blue-team" color="blue" max="8" max-overfill="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true" enchantment="dig speed:1">stone pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="dig speed:2">stone axe</item>
+        <item slot="8" amount="64">golden carrot</item>
+        <item slot="7">golden apple</item>
+        <item slot="28" amount="24">arrow</item>
+    </kit>
+	<kit id="red-kit" parents="spawn-kit">
+		<helmet material="leather helmet" color="AF002A"/>
+		<chestplate material="iron chestplate" enchantment="protection projectile:2"/>
+		<leggings material="leather leggings" color="AF002A"/>
+		<boots material="gold boots" enchantment="protection fall:1"/>
+		<item slot="4" amount="4" damage="14">stained glass</item>
+	</kit>
+	<kit id="blue-kit" parents="spawn-kit">
+		<helmet material="leather helmet" color="6E6EF9"/>
+		<chestplate material="iron chestplate" enchantment="protection projectile:2"/>
+		<leggings material="leather leggings" color="6E6EF9"/>
+		<boots material="gold boots" enchantment="protection fall:1"/>	
+		<item slot="4" amount="4" damage="11">stained glass</item>		
+	</kit>	
+</kits>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="no-void">
+        <void/>
+    </not>
+	<not id="no-blocks">
+		<any>
+			<material>mob spawner</material>
+			<material>stained glass:15</material>
+			<material>stained glass:10</material>
+			<material>stained glass:8</material>
+			<material>wool:15</material>
+			<material>wool:14</material>
+			<material>wool:11</material>
+			<material>wool:10</material>
+			<material>wool:7</material>
+			<material>wool:5</material>
+			<material>wool:1</material>
+			<material>coal block</material>
+			<material>double step</material>
+			<material>step</material>
+			<material>carpet</material>
+			<material>beacon</material>
+		</any>	
+	</not>
+</filters>
+<regions>	
+	<apply block-place="no-void" message="You cannot build in the void!">
+		<region>
+			<union>
+				<negative>
+					<union>
+                   		<!--Blue-->
+                   		<rectangle min="50,31" max="-17,20"/>
+						<!--Red-->
+                   		<rectangle min="50,65" max="-17,54"/>
+                   		<!--Wool-->
+                   		<rectangle min="-4,50" max="-52,35"/>
+                   		<!--Fireball-->
+                   		<rectangle min="51,65" max="73,20"/>						
+                	</union>
+				</negative>
+			</union>
+		</region>
+	</apply>
+	<apply block-break="no-blocks" region="everywhere"/>
+</regions>
+<maxbuildheight>16</maxbuildheight>
+<wools>
+	<wool team="red-team" color="silver" location="-55.5,16,42.5">
+		<monument><block>24,8,71</block></monument>
+	</wool>
+	<wool team="blue-team" color="silver" location="-55.5,16,42.5">
+		<monument><block>24,8,13</block></monument>
+	</wool>
+</wools>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="180">
+            <point>24.5,7.1,69.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="0">
+            <point>24.5,7.1,15.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cylinder base="24.5,17,42.5" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<crafting>
+	<disable>minecart</disable>
+	<disable>boat</disable>
+	<disable>workbench</disable>	
+</crafting>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<itemremove>
+    <item>golden carrot</item>
+	<item>arrow</item>
+	<item>stained glass</item>
+	<item>wood</item>
+	<item>stained clay</item>
+	<item>leather helmet</item>
+	<item>iron chestplate</item>
+	<item>leather leggings</item>
+	<item>gold boots</item>	
+</itemremove>
+<kill-rewards>
+	<kill-reward>
+		<item>golden apple</item>
+		<item amount="12">arrow</item>
+	</kill-reward>
+	<kill-reward filter="only-red">
+		<item amount="4" damage="14">stained glass</item>
+		<item amount="4" damage="14">stained clay</item>		
+	</kill-reward>
+	<kill-reward filter="only-blue">
+		<item amount="4" damage="11">stained glass</item>
+		<item amount="4" damage="11">stained clay</item>		
+	</kill-reward>	
+</kill-rewards>
+<blitz>
+	<lives>2</lives>
+</blitz>
+<time results="objective">10m</time>
+<respawn delay="1s"/>
+</map>

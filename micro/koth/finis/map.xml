@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Finis</name>
+<version>1.0.0</version>
+<objective>Be the first to score 300 points!</objective>
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!--Valky -->
+</authors>
+<gamemode>KotH</gamemode>
+<score>
+    <limit>300</limit>
+</score>
+<teams>
+    <team id="red" color="dark red" max="3" max-overfill="3">Red</team>
+    <team id="blue" color="blue" max="3" max-overfill="3">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="-135">
+            <point>-173.5,13,110.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="45">
+            <point>-151.5,13,64.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cylinder base="-162.5,17,87.5" radius="1" height="0.5" />
+        </regions>
+    </default>
+</spawns>
+<respawn delay="3s" auto="true"/>
+<kits>
+    <kit id="spawn-kit" force="true">
+		<item slot="0" material="stone sword" unbreakable="true"/>
+		<item slot="1" material="bow" unbreakable="true"/>
+		<item slot="2" material="golden apple" amount="1"/>
+		<item slot="3" material="cooked beef" amount="24"/>
+		<item slot="8" material="arrow" amount="8"/>
+		<potion amplifier="7" duration="3">resistance</potion>
+		<leggings material="gold leggings" unbreakable="true"/>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+		<helmet color="993333" material="leather helmet" unbreakable="true"/>
+		<chestplate color="993333" material="leather chestplate" unbreakable="true"/>
+		<boots color="993333" material="leather boots" unbreakable="true"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+		<helmet color="334CB2" material="leather helmet" unbreakable="true"/>
+		<chestplate color="334CB2" material="leather chestplate" unbreakable="true"/>
+		<boots color="334CB2" material="leather boots" unbreakable="true"/>
+    </kit>
+</kits>
+<control-points capture-player="lead" incremental="true" show-progress="true" required="false" points="1" capture-time="5" neutral-state="false">
+    <control-point name="Red's Hill" id="red-hill">
+        <capture-region>
+            <cuboid min="-152,13,78" max="-157,16,83"/>
+        </capture-region>
+        <progress-display-region>
+            <cuboid min="-152,13,78" max="-157,16,83"/>
+        </progress-display-region>
+        <owner-display-region>
+            <cuboid min="-152,13,78" max="-157,33,83"/>		
+        </owner-display-region>
+    </control-point>
+    <control-point name="Blue's Hill" id="blue-hill">
+        <capture-region>
+            <cuboid min="-173,13,97" max="-168,16,92"/>
+        </capture-region>
+        <progress-display-region>
+            <cuboid min="-173,13,97" max="-168,16,92"/>
+        </progress-display-region>
+        <owner-display-region>
+            <cuboid min="-173,13,97" max="-168,33,92"/>		
+        </owner-display-region>
+    </control-point>
+</control-points>
+<regions>
+    <rectangle id="red-spawn" min="-149,62" max="-154,67"/>
+    <rectangle id="blue-spawn" min="-170,108" max="-176,113"/>
+	<union id="jumppads">
+		<cuboid min="-169,12,73" max="-171,13,71"/>
+		<cuboid min="-156,12,102" max="-154,13,104"/>	
+	</union>
+	<apply region="jumppads" velocity="0,1,0"/>
+    <apply enter="only-red" message="You may not enter the enemy spawn." region="red-spawn"/>
+    <apply enter="only-blue" message="You may not enter the enemy spawn." region="blue-spawn"/>
+    <apply block="never" region="everywhere"/>
+</regions>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>	
+</toolrepair>
+<itemremove>
+    <item>cooked beef</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>gold leggings</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+	<item amount="1" material="golden apple"/>
+	<item amount="6" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<timelock>on</timelock>
+</map>

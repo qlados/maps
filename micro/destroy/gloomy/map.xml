@@ -1,0 +1,134 @@
+<map proto="1.4.0">
+<name>Gloomy</name>
+<version>1.0.1</version>
+<objective>Destroy the other team's Gold monument!</objective>
+<authors>
+	<author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!-- Valky -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue"     max="4" max-overfill="4">Blue</team>
+    <team id="red-team"  color="dark red" max="4" max-overfill="4">Red</team>
+</teams>
+<time>20m</time>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword" />
+        <item slot="1" unbreakable="true" material="bow" />
+        <item slot="2" unbreakable="true" material="stone pickaxe" />
+        <item slot="3" unbreakable="true" material="stone axe" />
+        <item slot="4" amount="16"        material="wood" damage="2" />
+        <item slot="8" amount="64"        material="golden carrot" />
+        <item slot="28" amount="12" material="arrow" />		
+        <chestplate    unbreakable="true" material="chainmail chestplate" />
+        <boots unbreakable="true" material="iron boots" />
+        <effect duration="3" amplifier="10">resistance</effect>
+        <maybe filter="time-10">
+            <item slot="2" unbreakable="true" enchantment="dig speed:1">stone pickaxe</item>
+        </maybe>
+        <maybe filter="time-15">
+            <item slot="2" unbreakable="true" enchantment="dig speed:2">stone pickaxe</item>
+        </maybe>		
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <item     slot="5" amount="8" damage="11"  material="stained clay" />
+        <helmet   unbreakable="true" color="0066cc" material="leather helmet" />
+        <leggings unbreakable="true" color="0066cc" material="leather leggings" />
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <item     slot="5" amount="8" damage="14"  material="stained clay" />
+        <helmet   unbreakable="true" color="cd0000" material="leather helmet" />
+        <leggings unbreakable="true" color="cd0000" material="leather leggings" />
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="-90">-223.5,5,770.5</point>
+        </regions>
+    </default>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <point yaw="-90">-250,5,792</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="-90">-250,5,749</point>
+        </regions>
+    </spawn>
+</spawns>
+<respawn delay="3.5s" />
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <not id="deny-void">
+        <void />
+    </not>
+	<all id="time-10">
+		<time>10m</time>
+	</all>
+	<all id="time-15">
+		<time>15m</time>
+	</all>	
+</filters>
+<regions>
+    <union id="team-spawns">
+        <rectangle id="blue-spawns" min="-245,788" max="-253,796" />
+        <rectangle id="red-spawns" min="-245,753" max="-253,745" />
+    </union>
+    <rectangle id="buildable" min="-222,753" max="-245,788" />
+    <apply region="team-spawns"  block="never"                   message="You may not modify the spawn area" />
+    <apply region="buildable"    block="always" />
+    <apply                       block-place="deny-void"         message="You may not interact with that material here" />
+</regions>
+<destroyables materials="gold block" mode-changes="true">
+    <destroyable id="blue-monument" name="Monument" owner="blue-team">
+        <region>
+            <cuboid min="-223,10,801" max="-220,13,804" />
+        </region>
+    </destroyable>
+    <destroyable id="red-monument" name="Monument" owner="red-team">
+        <region>
+            <cuboid min="-223,10,737" max="-220,13,740" />
+        </region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="10m" material="coal block" />
+    <mode after="15m" material="packed ice" />
+</modes>
+<kill-rewards>
+    <kill-reward>
+        <item amount="6" material="arrow" />
+        <item            material="golden apple" />
+    </kill-reward>
+    <kill-reward filter="only-blue">
+        <item amount="8" damage="11" material="stained clay" />
+    </kill-reward>
+    <kill-reward filter="only-red">
+        <item amount="8" damage="14" material="stained clay" />
+    </kill-reward>
+</kill-rewards>
+<toolrepair>
+	<tool>stone sword</tool>
+    <tool>bow</tool>
+	<tool>stone pickaxe</tool>
+	<tool>stone axe</tool>
+</toolrepair>
+<itemremove>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>gold block</item>
+    <item>coal block</item>
+    <item>packed ice</item>
+    <item>stained clay</item>
+</itemremove>
+<maxbuildheight>14</maxbuildheight>
+</map>

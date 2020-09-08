@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Dharma</name>
+<version>1.3.1</version>
+<objective>Capture and place both of the enemies wools!</objective>
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!-- Valky -->
+</authors>
+<teams>
+	<team id="red-team" color="dark red" max="8" max-overfill="8">Red</team>
+	<team id="blue-team" color="blue" max="8" max-overfill="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite">bow</item>
+        <item slot="2" unbreakable="true" enchantment="dig speed:1">iron pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="dig speed:2">stone axe</item>
+        <item slot="4" amount="64">golden carrot</item>
+        <item slot="5">golden apple</item>
+        <item slot="6" amount="64">glass</item>		
+		<item slot="7" amount="64">wood</item>
+		<item slot="8" amount="64">wood</item>
+        <item slot="28" amount="1">arrow</item>
+        <potion amplifier="20" duration="5s">resistance</potion>
+    </kit>
+</kits>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="no-void">
+        <void/>
+    </not>
+    <all id="only-iron-red">
+        <material>iron block</material>
+        <team>red-team</team>
+    </all>
+    <all id="only-iron-blue">
+        <material>iron block</material>
+        <team>blue-team</team>
+    </all>
+	<not id="no-spawner">
+		<material>mob spawner</material>
+	</not>
+</filters>
+<regions>
+	<union id="red-wools">
+		<rectangle min="-309,-226" max="-323,-214"/><!--Lime-->
+		<rectangle min="-400,-226" max="-414,-214"/><!--Green-->
+	</union>
+	<union id="red-spawn">
+		<rectangle min="-379,-388" max="-344,-414"/>
+	</union>
+	<union id="blue-wools">
+		<rectangle min="-309,-411" max="-323,-423"/><!--Purple-->
+		<rectangle min="-414,-411" max="-400,-423"/><!--Pink-->
+	</union>
+	<union id="blue-spawn">
+		<rectangle min="-344,-249" max="-379,-223"/>
+	</union>
+	<union id="iron-renew">
+		<rectangle min="-379,-388" max="-344,-414"/>
+		<rectangle min="-344,-249" max="-379,-223"/>
+	</union>
+	
+    <apply block="only-iron-red" region="red-spawn" message="You cannot edit the spawns!"/>
+    <apply block="only-iron-blue" region="blue-spawn" message="You cannot edit the spawns!"/>
+	<apply enter="only-red" region="red-spawn" message="You cannot enter the enemies spawn!"/>
+	<apply enter="only-red" region="red-wools" message="You cannot enter your own wool room!"/>
+	<apply enter="only-blue" region="blue-spawn" message="You cannot enter the enemies spawn!"/>
+	<apply enter="only-blue" region="blue-wools" message="You cannot enter your own wool room!"/>
+    <apply block="only-red" region="red-wools" message="You cannot edit the wool rooms!"/>
+    <apply block="only-blue" region="blue-wools" message="You cannot edit the wool rooms!"/>
+	<apply block-place="no-void" message="You cannot build in the void!">
+		<region>
+			<union>
+				<negative>
+					<union>
+                   		<!--Sides-->
+                   		<rectangle min="-373,-370" max="-414,-267"/>
+                   		<rectangle min="-350,-370" max="-309,-267"/>
+                   		<!--Mid-->
+                   		<rectangle min="-350,-308" max="-373,-329"/>
+                	</union>
+				</negative>
+			</union>
+		</region>
+	</apply>
+	<apply block-break="no-spawner" region="everywhere"/>
+</regions>
+<maxbuildheight>22</maxbuildheight>
+<wools>
+	<wool team="red-team" color="lime" location="-316,13,-217.5">
+		<monument><block>-360,10,-411</block></monument>
+	</wool>
+	<wool team="red-team" color="green" location="-407,13,-217.5">
+		<monument><block>-364,10,-411</block></monument>
+	</wool>
+	<wool team="blue-team" color="purple" location="-316,13,-419.5">
+		<monument><block>-360,10,-227</block></monument>
+	</wool>
+	<wool team="blue-team" color="pink" location="-407,13,-419.5">
+		<monument><block>-364,10,-227</block></monument>
+	</wool>
+</wools>
+<spawns>
+    <spawn team="red-team" kit="spawn-kit">
+        <regions yaw="0">
+            <point>-361.5,9,-407.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="spawn-kit">
+        <regions yaw="180">
+            <point>-361.5,9,-229.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cylinder base="-361.5,42,-318.5" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<crafting>
+	<disable>minecart</disable>
+	<disable>boat</disable>
+</crafting>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<itemremove>
+	<item>gold plate</item>
+    <item>golden carrot</item>
+	<item>wood</item>
+	<item>glass</item>
+	<item>string</item>
+    <item>step</item>
+	<item>sandstone stairs</item>
+	<item>step</item>
+	<item>trap door</item>
+	<item>stained clay</item>
+</itemremove>
+<killreward>
+	<item>golden apple</item>
+    <item amount="32">wood</item>
+	<item amount="16">glass</item>	
+</killreward>
+<block-drops>
+    <rule wrong-tool="false">
+        <region>
+            <everywhere/>
+        </region>
+        <filter>
+            <any>
+                <material>sandstone</material>
+                <material damage="1">sandstone</material>	
+                <material damage="2">sandstone</material>					
+            </any>
+        </filter>
+        <drops>
+            <item material="sandstone" damage="2"/>
+        </drops>
+    </rule>
+</block-drops>
+<renewables>
+	<renewable interval="1" grow="true" particles="true" sound="true" avoid-players="3">
+		<region>
+			<region id="iron-renew"/>
+		</region>
+		<renew-filter>
+			<any>
+				<material>iron block</material>
+			</any>
+		</renew-filter>
+	</renewable>
+</renewables>
+<time results="objective">45m</time>
+<respawn delay="8s"/>
+</map>
