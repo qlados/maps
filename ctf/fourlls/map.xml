@@ -1,0 +1,184 @@
+<map proto="1.4.0">
+<name>Fourlls</name>
+<version>1.0.0</version>
+<objective>Get the most points by capping flags!</objective>
+<time>12m</time>
+<score/>
+<authors>
+		<author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/><!-- Valky-->
+		<author uuid="ffffec3a-728a-485a-af6e-374e86883939"/><!-- Jeremy_Wade-->
+		<author uuid="be280357-73fe-465c-a342-2bf0357327c4"/><!-- Naatz-->	
+</authors>
+<contributors>
+	<contributor contribution="WE help">gamez7</contributor>
+</contributors>
+<teams>
+	<team id="red-team" color="dark red" max="6" max-overfill="8">Red</team>
+	<team id="blue-team" color="blue" max="6" max-overfill="8">Blue</team>
+	<team id="green-team" color="green" max="6" max-overfill="8">Green</team>
+	<team id="yellow-team" color="yellow" max="6" max-overfill="8">Yellow</team>
+</teams>
+<respawn delay="3s" spectate="true" auto="true"/>
+<kits>
+<kit id="spawn" potion-particles="false">
+	<item slot="0" unbreakable="true">stone sword</item>
+	<item slot="1" unbreakable="true">bow</item>
+	<item slot="28" amount="12">arrow</item>
+	<potion duration="3" amplifier="4">heal</potion>
+	<potion duration="3" amplifier="4">damage resistance</potion>
+	<potion duration="oo">night vision</potion>
+	<leggings enchantment="protection projectile:1" damage="-3000" unbreakable="true">iron leggings</leggings>
+</kit>
+<kit id="red" parents="spawn">
+	<helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+	<chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+	<boots color="cd0000" unbreakable="true">leather boots</boots>
+</kit>
+<kit id="blue" parents="spawn">
+	<helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+	<chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+	<boots color="0066cc" unbreakable="true">leather boots</boots>
+</kit>
+<kit id="green" parents="spawn">
+	<helmet color="667F33" unbreakable="true">leather helmet</helmet>
+	<chestplate color="667F33" unbreakable="true">leather chestplate</chestplate>
+	<boots color="667F33" unbreakable="true">leather boots</boots>
+</kit>
+<kit id="yellow" parents="spawn">
+	<helmet color="E5E533" unbreakable="true">leather helmet</helmet>
+	<chestplate color="E5E533" unbreakable="true">leather chestplate</chestplate>
+	<boots color="E5E533" unbreakable="true">leather boots</boots>
+</kit>
+<kit id="mid-flag-kit">
+    <effect duration="oo" amplifier="-3">health boost</effect>
+    <effect duration="oo" amplifier="3">slowness</effect>
+    <effect duration="2" amplifier="2">absorption</effect>	
+</kit>
+<kit id="team-flag-kit">
+    <effect duration="oo" amplifier="-2">health boost</effect>
+    <effect duration="oo" amplifier="2">slowness</effect>
+    <effect duration="2" amplifier="1">absorption</effect>		
+</kit>
+<kit id="reset-health" force="true">
+    <effect duration="1" amplifier="0">health boost</effect>
+</kit>
+<kit id="obs" potion-particles="false">
+	<potion duration="oo">night vision</potion>
+</kit>
+</kits>
+<regions>	
+    <union id="net-zones">
+        <cuboid id="red-net"    min="-83,20,59"  max="-90,22,52"/>
+        <cuboid id="blue-net"   min="-18,20,52" max="-11,22,59"/>
+        <cuboid id="green-net"  min="-54,20,23"  max="-46,22,16"/>
+        <cuboid id="yellow-net" min="-47,20,88" max="-54,22,95"/>
+    </union>
+	<!--Block Applys-->
+	<apply block="never" message="You may not break/place blocks here!">
+		<rectangle min="-oo,-oo" max="oo,oo"/>
+	</apply>
+	<apply use="no-dispensers">
+		<rectangle min="-oo,-oo" max="oo,oo"/>
+	</apply>	
+</regions>
+<spawns>
+<spawn team="red-team" kit="red">
+	<regions yaw="-90">
+		<cylinder base="-123.5,31,55.5" radius="0.5" height="0.5"/>
+	</regions>	
+</spawn>
+<spawn team="blue-team" kit="blue">
+	<regions yaw="90">
+		<cylinder base="22.5,31,55.5" radius="0.5" height="0.5"/>
+	</regions>	
+</spawn>
+<spawn team="green-team" kit="green">
+	<regions yaw="0">
+		<cylinder base="-51.5,31,-17.5" radius="0.5" height="0.5"/>
+	</regions>	
+</spawn>
+<spawn team="yellow-team" kit="yellow">
+	<regions yaw="180">
+		<cylinder base="-50.5,31,128.5" radius="0.5" height="0.5"/>
+	</regions>	
+</spawn>
+<default kit="obs">
+	<regions yaw="0">
+		<cuboid min="-50,57,56" max="-51,57,55"/>
+	</regions>
+</default>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <team id="only-green">green-team</team>
+    <team id="only-yellow">yellow-team</team>
+	<deny id="deny-red">
+        <filter id="only-red"/>
+    </deny>
+    <deny id="deny-blue">
+        <filter id="only-blue"/>
+    </deny>
+    <deny id="deny-green">
+        <filter id="only-green"/>
+    </deny>
+    <deny id="deny-yellow">
+        <filter id="only-yellow"/>
+    </deny>
+	
+	<all id="no-dispensers">
+		<not>
+			<material>dispenser</material>
+		</not>
+	</all>
+</filters>
+<!--Itemremovals+Killrewards-->
+<itemremove>
+	<item>stone sword</item>
+	<item>bow</item>
+	<item>arrow</item>
+	<item>golden apple</item>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>iron leggings</item>
+	<item>leather boots</item>
+	<item>banner</item>
+</itemremove>
+<killreward>
+	<item amount="1">golden apple</item>
+	<item amount="12">arrow</item>
+</killreward>
+<!--Flags-->
+<flags>
+    <flag id="red-flag" name="Red Flag" owner="red-team" color="red" carry-kit="team-flag-kit" drop-kit="reset-health" points="-1">
+        <post yaw="-90" respawn-time="1s" recover-time="1s" pickup-filter="deny-red">-86.5,21,55.5</post>
+    </flag>
+    <flag id="yellow-flag" name="Yellow Flag" owner="yellow-team" color="yellow" carry-kit="team-flag-kit" drop-kit="reset-health" points="-1">
+        <post yaw="180" respawn-time="1s" recover-time="1s" pickup-filter="deny-yellow">-50.5,21,91.5</post>
+    </flag>
+    <flag id="blue-flag" name="Blue Flag" owner="blue-team" color="blue" carry-kit="team-flag-kit" drop-kit="reset-health" points="-1">
+        <post yaw="90" respawn-time="1s" recover-time="1s" pickup-filter="deny-blue">-14.5,21,55.5</post>
+    </flag>
+    <flag id="green-flag" name="Green Flag" owner="green-team" color="green" carry-kit="team-flag-kit" drop-kit="reset-health" points="-1">
+        <post yaw="0" respawn-time="1s" recover-time="1s" pickup-filter="deny-green">-50.5,21,19.5</post>
+    </flag>
+    <flag id="mid-flag" name="Mid Flag" shared="true" color="white" carry-kit="mid-flag-kit" drop-kit="reset-health">
+        <post yaw="90" respawn-time="20s" recover-time="5s">-50.5, 19, 55.5</post>
+    </flag>	
+    <net points="1" capture-filter="only-red"    region="red-net"    flags="blue-flag green-flag yellow-flag"/>
+    <net points="1" capture-filter="only-blue"   region="blue-net"   flags="red-flag yellow-flag green-flag"/>
+    <net points="1" capture-filter="only-green"  region="green-net"  flags="red-flag yellow-flag blue-flag"/>
+    <net points="1" capture-filter="only-yellow" region="yellow-net" flags="blue-flag green-flag red-flag"/>
+    <net points="2" capture-filter="only-red"    region="red-net"    flags="mid-flag"/>
+    <net points="2" capture-filter="only-blue"   region="blue-net"   flags="mid-flag"/>
+    <net points="2" capture-filter="only-green"  region="green-net"  flags="mid-flag"/>
+    <net points="2" capture-filter="only-yellow" region="yellow-net" flags="mid-flag"/>	
+</flags>
+<!--Miscs-->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+	<damage>fall</damage>
+</disabledamage>
+</map>
