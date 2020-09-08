@@ -2,7 +2,7 @@ This repositories contains various maps that I, qlados (also known as Valky), ma
 
 More generally every map in this repository should work with the Minecraft 1.8 PGM Plugin. For more information on PGM check https://pgm.dev/.
 
-If you encounter any bugs using these maps contact me via Discord, my tag is Valky#2870.
+If you encounter any bugs using these maps create an issue.
 
 Cheers.
 
