@@ -1,4 +1,4 @@
-This repositories contains various maps that I, qlados (also known as Valkyh), made for PGM (https://pgm.dev/).
+This repositories contains various maps that I, qlados (also known as Valky), made for PGM (https://pgm.dev/).
 
 More generally every map in this repository SHOULD work with the Minecraft 1.8 PGM Plugin, maintained by Electroid (https://github.com/Electroid/PGM).
 
