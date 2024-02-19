@@ -1,0 +1,106 @@
+<map proto="1.4.2">
+<name>Scorched 5v5</name>
+<version>1.0.4</version>
+<include id="conquest"/>
+<objective>Control the flag for 200 seconds to win!</objective>
+<gamemode>kotf</gamemode>
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!-- Valky -->
+</authors>
+<contributors>
+    <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Middle aesthetics"/> <!-- rockymine -->
+    <contributor uuid="f1352a57-4fe3-4f0c-b867-56b771fc1a0f" contribution="5v5 edit"/> <!-- teagod -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="5" max-overfill="5">Blue</team>
+    <team id="red" color="dark red" max="5" max-overfill="5">Red</team>
+</teams>
+<kits>
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="conquest">
+        <effect duration="6" amplifier="255">resistance</effect>
+        <effect>night vision</effect>        
+    </kit>
+    <kit id="flag-kit" force="true">
+        <effect amplifier="-3">health boost</effect>
+        <effect duration="3" amplifier="2">absorption</effect>
+    </kit>
+    <kit id="reset-health" force="true">
+        <effect duration="0" amplifier="0">health boost</effect>
+    </kit>
+</kits>
+<spawns>
+    <default kit="default-kit">
+        <region yaw="-90">
+            <cylinder base="0.5,16,0.5" radius="1" height="0"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit" filter="has-flag">
+        <region yaw="180">
+            <point>0.5,16.5,64.5</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit" filter="has-flag">
+        <region yaw="0">
+            <point>0.5,16.5,-63.5</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <deny id="deny-beacon">
+        <material>beacon</material>
+    </deny>
+    <any id="has-flag">
+        <carrying-flag>flag</carrying-flag>
+        <not>
+            <same-team>
+                <carrying-flag>flag</carrying-flag>
+            </same-team>
+        </not>
+    </any>
+</filters>
+<regions>
+    <apply use="deny-beacon" block="never" block-physics="never"/>
+</regions>
+<spawners>
+    <spawner delay="9s">
+        <spawn-region>
+            <block>0,6,0</block>
+        </spawn-region>
+        <player-region>
+            <cylinder base="0.5,5.5,0.5" height="8" radius="7"/>
+        </player-region>
+        <item material="golden apple"/>
+    </spawner>
+</spawners>
+<flags>
+    <flag id="flag"
+          name="Flag"
+          color="purple"
+          shared="true"
+          points-rate="1"
+          pickup-kit="flag-kit"
+          drop-kit="reset-health"
+          flag-proximity-metric="none"
+          show-respawn-on-pickup="false">
+        <post return-time="0s" respawn-time="20s">
+            <!--<post name="Mid Post" respawn-filter="never">-351.5,12,510.5</post>-->
+            <post name="West Post" yaw="-90">-21.5,9,0.5</post>
+            <post name="East Post" yaw="90">22.5,9,0.</post>
+        </post>
+    </flag>
+</flags>
+<score>
+    <limit>200</limit>
+</score>
+<respawn delay="4.5s" spectate="true" auto="true">
+    <message>
+        {"translate":"death.respawn.confirmed.waiting.flagDropped"}
+    </message>
+</respawn>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
